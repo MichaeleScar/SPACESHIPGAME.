@@ -1,4 +1,5 @@
 import pygame
+from game.components.enemies.enemy_2 import Enemy_2
 from game.components.enemies.enemy_manager import EnemyManager
 
 
