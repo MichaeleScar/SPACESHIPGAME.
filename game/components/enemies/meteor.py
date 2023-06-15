@@ -1,12 +1,10 @@
 import pygame
 import random
-from game.utils.constants import  ENEMY_TYPE, METEOR_1, SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import  ENEMY_TYPE, METEOR_1, SCREEN_HEIGHT
 from game.components.enemies.enemy import Enemy
 
 
 class Meteor(Enemy):
-    X_POS_LIST = [100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900]
-    Y_POS = -50
     SPEED_Y = 7
 
     def __init__(self):
@@ -23,7 +21,4 @@ class Meteor(Enemy):
         if self.rect.y >= SCREEN_HEIGHT:
             ships.remove(self)
 
-
-    def draw(self, screen):
-        screen.blit(self.image, (self.rect.x, self.rect.y))
 

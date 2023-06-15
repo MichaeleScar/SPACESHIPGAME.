@@ -1,5 +1,6 @@
 import pygame
 import random
+from game.components.bullets.bullet import Bullet
 from game.utils.constants import ENEMY_2, ENEMY_TYPE, SCREEN_HEIGHT, SCREEN_WIDTH
 from game.components.enemies.enemy import Enemy
 
@@ -9,11 +10,9 @@ LEFT = "left"
 RIGHT = "right"
 
 class Enemy_2(Enemy):
-    MOVEMENTS = [LEFT, RIGHT]
-    X_POS_LIST = [100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900]
-    Y_POS = -50
     SPEED_X = 10
     SPEED_Y = 5
+    
 
     def __init__(self):
         self.image = pygame.transform.scale(ENEMY_2,(50, 50))
@@ -29,18 +28,8 @@ class Enemy_2(Enemy):
         self.move_x = random.randint(10, 10)
         self.moving_index = 0
 
+        self.shooting_time = random.randint(30, 50)
 
-    def update(self, ships):
-        self.rect.y += self.speed_y
-
-        if self.movement == LEFT:
-            self.rect.x -= self.speed_x
-        else:
-            self.rect.x += self.speed_x
-        self.updatee_movement()
-
-        if self.rect.y >= SCREEN_HEIGHT:
-            ships.remove(self)
 
     def updatee_movement(self):
         self.moving_index += 1
@@ -52,7 +41,3 @@ class Enemy_2(Enemy):
         if self.moving_index >= self.move_x:
             self.moving_index = 0
             self.movement = LEFT if  self.movement == RIGHT else RIGHT
-
-    def draw(self, screen):
-        screen.blit(self.image, (self.rect.x, self.rect.y))
-

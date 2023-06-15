@@ -1,8 +1,12 @@
 import time
+
+import pygame
 from game.components.enemies.enemy import Enemy
 from game.components.enemies.enemy_2 import Enemy_2
 from game.components.enemies.meteor import Meteor
 
+import pygame
+import random
 
 class EnemyManager:
     def __init__(self):
@@ -14,12 +18,12 @@ class EnemyManager:
         self.enemy_2_timer = 0 
         self.meteor_timer = 0  
 
-        self.enemy_delay = 5  # Tiempo de espera en segundos para el enemigo
-        self.enemy_2_delay = 10 
-        self.meteor_delay = 20  
+        self.enemy_delay = 5000  # Tiempo de espera en milisegundos para el enemigo
+        self.enemy_2_delay = 9900 
+        self.meteor_delay = 6000 
 
-    def update(self):
-        current_time = time.time() 
+    def update(self, game):
+        current_time = pygame.time.get_ticks()
 
         if current_time - self.enemy_timer >= self.enemy_delay:
             self.enemies.append(Enemy())
@@ -34,10 +38,10 @@ class EnemyManager:
             self.meteor_timer = current_time  
 
         for enemy in self.enemies:
-            enemy.update(self.enemies)
+            enemy.update(self.enemies, game)
 
         for enemy_2 in self.enemies_2:
-            enemy_2.update(self.enemies_2)
+            enemy_2.update(self.enemies_2, game)
 
         for meteor in self.meteors:
             meteor.update(self.meteors)
