@@ -1,12 +1,9 @@
-import time
 
 import pygame
 from game.components.enemies.enemy import Enemy
 from game.components.enemies.enemy_2 import Enemy_2
 from game.components.enemies.meteor import Meteor
 
-import pygame
-import random
 
 class EnemyManager:
     def __init__(self):
@@ -39,12 +36,27 @@ class EnemyManager:
 
         for enemy in self.enemies:
             enemy.update(self.enemies, game)
+            if enemy.rect.colliderect(game.player.rect):
+                self.enemies.remove(enemy)
+                game.playing = False
+                pygame.time.delay(1000)
+                break
 
         for enemy_2 in self.enemies_2:
             enemy_2.update(self.enemies_2, game)
+            if enemy_2.rect.colliderect(game.player.rect):
+                self.enemies_2.remove(enemy_2)
+                game.playing = False
+                pygame.time.delay(1000)
+                break
 
         for meteor in self.meteors:
             meteor.update(self.meteors)
+            if meteor.rect.colliderect(game.player.rect):
+                self.meteors.remove(meteor)
+                game.playing = False
+                pygame.time.delay(1000)
+                break
 
     def draw(self, screen):
         for enemy in self.enemies:

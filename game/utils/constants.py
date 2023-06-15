@@ -25,10 +25,14 @@ PLAYER_TYPE = 'player_1'
 SPACESHIP = pygame.image.load(os.path.join(IMG_DIR, "Spaceship/spaceship.png"))
 SPACESHIP_SHIELD = pygame.image.load(os.path.join(IMG_DIR, "Spaceship/spaceship_shield.png"))
 BULLET = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_1.png"))
+SPACESHIP_DESTROY= pygame.image.load(os.path.join(IMG_DIR, "Destroy/spaceship_destroy.png"))
 
 BULLET_ENEMY = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_2.png"))
 ENEMY_1 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_1.png"))
 ENEMY_2 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_2.png"))
 METEOR_1 = pygame.image.load(os.path.join(IMG_DIR, "Environment/meteor.png"))
+METEOR_DESTROY = pygame.image.load(os.path.join(IMG_DIR, "Destroy/meteor_destroy.png"))
+ENEMY_DESTROY = pygame.image.load(os.path.join(IMG_DIR, "Destroy/enemy_destroy.png"))
+
 
 FONT_STYLE = 'freesansbold.ttf'
