@@ -3,7 +3,6 @@ from game.components.bullets.bullet import Bullet
 from game.utils.constants import ENEMY_TYPE, PLAYER_TYPE
 
 
-
 class BulletManager:
 
     def __init__(self):
@@ -64,3 +63,7 @@ class BulletManager:
             self.enemy_bullets.append(bullet)
         if bullet.owner == PLAYER_TYPE:
             self.player_bullets.append(bullet)
+
+    def reset(self):
+        self.player_bullets = []
+        self.enemy_bullets  = []

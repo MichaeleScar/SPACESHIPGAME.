@@ -1,10 +1,9 @@
 import pygame
-from game.components.bullets import bullet_manager
 from game.components.bullets.bullet_manager import BulletManager
 from game.components.enemies.enemy import Enemy
-from game.components.enemies.enemy_2 import Enemy_2
 from game.components.enemies.enemy_manager import EnemyManager
 from game.components.menu import Menu
+from game.components.death_menu import DeathMenu
 
 
 from game.components.spaceship import Spaceship
@@ -25,13 +24,15 @@ class Game:
         self.y_pos_bg = 0
         self.score = 0
         self.death_count = 0
+        self.highest_score = 0 
         self.player = Spaceship()
         self.enemy_manager = EnemyManager()
         self.enemy = Enemy()
         self.bullet_manager = BulletManager()
         self.running = False
+        self.menu = Menu("SPACESHIP JOURNEY 16BITS", "PRESS ANY KEY TO START...", "")
+        self.death_menu = DeathMenu("message", "message 2", "message 3")
 
-        self.menu = Menu("Press any key to start...", text_size=35)
 
 
     def run(self):
@@ -44,9 +45,7 @@ class Game:
         pygame.quit()
 
     def play(self):
-        self.enemy_manager.reset()
-        self.playing = True
-        self.score = 0
+        self.reset_all()
         while self.playing:
             self.events()
             self.update()
@@ -92,14 +91,25 @@ class Game:
         text_rect.center = (1000, 50)
         self.screen.blit(text, text_rect)
 
-
     def show_menu(self):
         if self.death_count > 0:
-            self.menu.update_message("Other message")
+            self.death_menu.update_highest_score(self.score)
+            self.highest_score = self.death_menu.highest_score
+        
+            self.death_menu.update_message(f"HIGHEST SCORE: {self.highest_score}", f"SCORE: {self.score}", f"DEATHS: {self.death_count}")
+            
+            self.death_menu.draw(self.screen)
+            self.menu.events(self.on_close, self.play)
+        else:
+            self.menu.draw(self.screen)
+            self.menu.events(self.on_close, self.play)
 
-        self.menu.draw(self.screen)
-        self.menu.events(self.on_close, self.play)
-    
     def on_close(self):
         self.playing = False
         self.running = False
+    
+    def reset_all(self):
+        self.bullet_manager.reset()
+        self.enemy_manager.reset()
+        self.playing = True
+        self.score = 0
