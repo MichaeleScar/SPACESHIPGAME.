@@ -37,24 +37,27 @@ class EnemyManager:
         for enemy in self.enemies:
             enemy.update(self.enemies, game)
             if enemy.rect.colliderect(game.player.rect):
-                self.enemies.remove(enemy)
+                #self.enemies.remove(enemy)
                 game.playing = False
+                game.death_count += 1
                 pygame.time.delay(1000)
                 break
 
         for enemy_2 in self.enemies_2:
             enemy_2.update(self.enemies_2, game)
             if enemy_2.rect.colliderect(game.player.rect):
-                self.enemies_2.remove(enemy_2)
+                #self.enemies_2.remove(enemy_2)
                 game.playing = False
+                game.death_count += 1
                 pygame.time.delay(1000)
                 break
 
         for meteor in self.meteors:
             meteor.update(self.meteors)
             if meteor.rect.colliderect(game.player.rect):
-                self.meteors.remove(meteor)
+                #self.meteors.remove(meteor)
                 game.playing = False
+                game.death_count += 1
                 pygame.time.delay(1000)
                 break
 
@@ -67,4 +70,9 @@ class EnemyManager:
 
         for meteor in self.meteors:
             meteor.draw(screen)
+
+    def reset(self):
+        self.enemies = []
+        self.enemies_2 = []
+        self.meteors = []
 
