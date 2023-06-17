@@ -4,6 +4,7 @@ from game.components.enemies.enemy import Enemy
 from game.components.enemies.enemy_manager import EnemyManager
 from game.components.menu import Menu
 from game.components.death_menu import DeathMenu
+from game.components.power_ups.powerups_manager import PowerupsManager
 
 
 from game.components.spaceship import Spaceship
@@ -23,8 +24,7 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 0
         self.score = 0
-        self.death_count = 0
-        self.highest_score = 0 
+        self.death_count = 0 
         self.player = Spaceship()
         self.enemy_manager = EnemyManager()
         self.enemy = Enemy()
@@ -32,6 +32,7 @@ class Game:
         self.running = False
         self.menu = Menu("SPACESHIP JOURNEY 16BITS", "PRESS ANY KEY TO START...", "")
         self.death_menu = DeathMenu("message", "message 2", "message 3")
+        self.power_up_manager = PowerupsManager()
 
 
 
@@ -50,18 +51,20 @@ class Game:
             self.events()
             self.update()
             self.draw()
+        
 
     def events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.playing = False
-                self.running = False
+            
     
     def update(self):
         user_input = pygame.key.get_pressed()
         self.player.update(user_input, self.bullet_manager) 
         self.enemy_manager.update(self)
         self.bullet_manager.update(self)
+        self.power_up_manager.update(self)
 
     def draw(self):
         self.clock.tick(FPS)
@@ -71,6 +74,7 @@ class Game:
         self.player.draw(self.screen)
         self.enemy_manager.draw(self.screen)
         self.bullet_manager.draw(self.screen)
+        self.power_up_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
@@ -113,3 +117,4 @@ class Game:
         self.enemy_manager.reset()
         self.playing = True
         self.score = 0
+        self.power_up_manager.reset()
