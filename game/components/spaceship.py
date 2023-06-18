@@ -16,6 +16,7 @@ class Spaceship(Sprite):
         self.power_up_type = DEFAULT_TYPE
         self.has_power_up = False
         self.power_up_time = 0
+        self.change_image_timer = 0
 
 
     def update(self, user_input, bullet_manager):
@@ -58,5 +59,6 @@ class Spaceship(Sprite):
     def set_image(self, size=(40,60), image=(SPACESHIP)):
         self.image = image
         self.image = pygame.transform.scale(self.image, size)
+
 
 

@@ -69,5 +69,11 @@ class Enemy(Sprite):
             bullet_manager.add_bullet(bullet)
             self.shooting_time += random.randint(100, 150)
 
+    def set_image(self, size, image):
+        self.image = image
+        self.image = pygame.transform.scale(self.image, size)
+
+        
+
 
         

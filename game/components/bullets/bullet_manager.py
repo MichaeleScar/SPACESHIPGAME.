@@ -1,6 +1,6 @@
 import pygame
 from game.components.bullets.bullet import Bullet
-from game.utils.constants import ENEMY_TYPE, METEOR_DESTROY, PLAYER_TYPE, SHIELD_TYPE
+from game.utils.constants import ENEMY_DESTROY, ENEMY_TYPE, METEOR_DESTROY, PLAYER_TYPE, SHIELD_TYPE, SPACESHIP_DESTROY
 
 
 class BulletManager:
@@ -15,11 +15,13 @@ class BulletManager:
             bullet.update(self.enemy_bullets, game.player)
             if bullet.rect.colliderect(game.player.rect):
                 self.enemy_bullets.remove(bullet)
-                if game.player.power_up_type != SHIELD_TYPE:
-                   game.playing = False
+                if not game.player.has_power_up or game.player.power_up_type != SHIELD_TYPE:
+                   #game.player.set_image(size=(80,120),image=SPACESHIP_DESTROY)
                    game.death_count += 1
-                   pygame.time.delay(1000)
-                   break
+                   game.playing = False
+                   pygame.time.delay(2000)
+
+                break
 
         for bullet in self.player_bullets:
             bullet.update(self.player_bullets, game.enemy_manager.enemies + game.enemy_manager.enemies_2 + game.enemy_manager.meteors)
@@ -29,7 +31,9 @@ class BulletManager:
                     if bullet in self.player_bullets:
                         self.player_bullets.remove(bullet)
                     if enemy in game.enemy_manager.enemies:
+                        enemy.set_image(size=(50, 50), image=ENEMY_DESTROY)
                         game.enemy_manager.enemies.remove(enemy)
+                        enemy.set_image(ENEMY_DESTROY)
                         game.score += 1
                     break
 
@@ -47,7 +51,7 @@ class BulletManager:
                     if bullet in self.player_bullets:
                         self.player_bullets.remove(bullet)
                     if meteor in game.enemy_manager.meteors:
-                        #game.meteor.set_image()
+                        
                         game.enemy_manager.meteors.remove(meteor)
                         game.score += 1
 
@@ -70,7 +74,7 @@ class BulletManager:
     def reset(self):
         self.player_bullets = []
         self.enemy_bullets  = []
+        
 
-    def set_image(self, size=(40,60), image=METEOR_DESTROY):
-        self.image = image
-        self.image = pygame.transform.scale(self.image, size)
+
+    
