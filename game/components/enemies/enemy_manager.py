@@ -25,7 +25,7 @@ class EnemyManager:
         if current_time - self.enemy_timer >= self.enemy_delay:
             self.enemies.append(Enemy())
             self.enemy_timer = current_time  # Reiniciar el contador de tiempo
-
+            
         if not self.enemies_2 and current_time - self.enemy_2_timer >= self.enemy_2_delay:
             self.enemies_2.append(Enemy_2())
             self.enemy_2_timer = current_time 

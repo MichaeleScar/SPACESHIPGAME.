@@ -12,6 +12,9 @@ class PowerupsManager:
         self.when_appears = random.randint(10000, 15000)
         self.duration = 10000
         self.power_up_start_time = 0
+        self.sound_powerup = pygame.mixer.Sound("game/assets/Sounds/power_up.ogg")
+        
+
 
 
     def generate_power_up(self):
@@ -33,6 +36,7 @@ class PowerupsManager:
         for power_up in self.power_ups:
             power_up.update(game.game_speed, self.power_ups)
             if game.player.rect.colliderect(power_up):
+                self.sound_powerup.play()
                 if type(power_up) == Heart:
                     game.player.health += 1
                 else:

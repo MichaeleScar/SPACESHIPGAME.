@@ -30,7 +30,7 @@ class Game:
         self.enemy = Enemy()
         self.bullet_manager = BulletManager()
         self.running = False
-        self.menu = Menu(ICON, TITLE_1, TITLE_2, "", text_size=24)
+        self.menu = Menu(ICON, TITLE_1, TITLE_2, "", text_size=40)
         self.death_menu = DeathMenu(SPACESHIP_DESTROY,GAMEOVER, FINAL_TITLE_1, "message 3")
         self.power_up_manager = PowerupsManager()
 
@@ -96,22 +96,17 @@ class Game:
         text_rect.center = (1000, 50)
         self.screen.blit(text, text_rect)
 
-    def draw_power_up_duration(self):
-        if self.player.has_power_up:
-            font = pygame.font.Font(FONT_STYLE, 22)
-            current_time = pygame.time.get_ticks()
-            time_left = max(0, self.duration - (current_time - self.power_up_start_time))
-            time_text = font.render(f"Power-up Duration: {time_left / 1000:.1f}s", True, (255, 255, 255))
-            time_text_rect = time_text.get_rect()
-            time_text_rect.center = (1000, 80)
-            self.screen.blit(time_text, time_text_rect)
-
     def show_menu(self):
         if self.death_count > 0:
             self.death_menu.update_highest_score(self.score)
             self.highest_score = self.death_menu.highest_score
         
-            self.death_menu.update_message( SPACESHIP_DESTROY ,GAMEOVER, FINAL_TITLE_1, f"DEATHS: {self.death_count}")
+            self.death_menu.update_message(
+                pygame.transform.scale(SPACESHIP_DESTROY, (50, 50)), 
+                pygame.transform.scale(GAMEOVER, (300,100)),
+                pygame.transform.scale(FINAL_TITLE_1, (500, 150)),
+                f"HIGHEST SCORE: {self.highest_score}\nSCORE: {self.score}\nDEATHS: {self.death_count}"
+            )
             
             self.death_menu.draw(self.screen)
             self.menu.events(self.on_close, self.play)

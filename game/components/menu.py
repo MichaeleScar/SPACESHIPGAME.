@@ -21,6 +21,8 @@ class Menu:
         self.game_speed = 10
         self.x_pos_bg = 0
         self.y_pos_bg = 0
+        #self.sound_intro = pygame.mixer.Sound("game/assets/Sounds/.ogg")
+
         
 
         
@@ -43,31 +45,31 @@ class Menu:
 
     def update_message(self,ICON, TITLE_1, TITLE_2, message_3):
     # Actualizar los mensajes
-        self.icon = pygame.transform.scale(ICON, (120, 80))
-        self.image = pygame.transform.scale(TITLE_1, (700, 270))
-        self.image_2 = pygame.transform.scale(TITLE_2, (1000, 150))
+        self.icon = pygame.transform.scale(ICON, (100, 100))
+        self.image = pygame.transform.scale(TITLE_1, (1000, 150))
+        self.image_2 = pygame.transform.scale(TITLE_2, (800, 150))
         self.message_3 = message_3
     
     #icon 
         self.icon_rect = self.icon.get_rect()
-        self.icon_rect.center = (self.HALF_SCREEN_WIDTH + 105, self.HALF_SCREEN_HEIGHT + 50)
+        self.icon_rect.center = (self.HALF_SCREEN_WIDTH, self.HALF_SCREEN_HEIGHT )
 
     # Renderizar y posicionar el primer mensaje
         self.image_rect = self.image.get_rect()
         self.image_rect.centerx = self.HALF_SCREEN_WIDTH
-        self.image_rect.y = self.HALF_SCREEN_HEIGHT - 275
+        self.image_rect.y = self.HALF_SCREEN_HEIGHT - 230
 
     # Renderizar y posicionar el segundo mensaje
         self.image_2_rect = self.image_2.get_rect()
         self.image_2_rect.centerx = self.HALF_SCREEN_WIDTH
-        self.image_2_rect.y = self.HALF_SCREEN_HEIGHT + 110
+        self.image_2_rect.y = self.HALF_SCREEN_HEIGHT + 80
         
 
     # Renderizar y posicionar el tercer mensaje
         self.text_3 = self.font.render(self.message_3, True, (255, 255, 250))
         self.text_3_rect = self.text_3.get_rect()
         self.text_3_rect.centerx = self.HALF_SCREEN_WIDTH
-        self.text_3_rect.y = self.HALF_SCREEN_HEIGHT + 90
+        self.text_3_rect.y = self.HALF_SCREEN_HEIGHT 
 
     def draw_background(self):
         image = pygame.transform.scale(BG, (SCREEN_WIDTH, SCREEN_HEIGHT))

@@ -31,9 +31,7 @@ class BulletManager:
                     if bullet in self.player_bullets:
                         self.player_bullets.remove(bullet)
                     if enemy in game.enemy_manager.enemies:
-                        enemy.set_image(size=(50, 50), image=ENEMY_DESTROY)
                         game.enemy_manager.enemies.remove(enemy)
-                        enemy.set_image(ENEMY_DESTROY)
                         game.score += 1
                     break
 

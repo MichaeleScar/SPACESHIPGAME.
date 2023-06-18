@@ -1,5 +1,6 @@
 import pygame
 import os
+pygame.init()
 
 # Global Constants
 TITLE = "Spaceships Game"
@@ -35,7 +36,9 @@ METEOR_1 = pygame.image.load(os.path.join(IMG_DIR, "Environment/meteor.png"))
 METEOR_DESTROY = pygame.image.load(os.path.join(IMG_DIR, "Destroy/meteor_destroy.png"))
 ENEMY_DESTROY = pygame.image.load(os.path.join(IMG_DIR, "Destroy/enemy_destroy.png"))
 
-
+#text_size = 40
+#font_path = "game/assets/Fonts/ka1.otf"
+#FONT_STYLE = pygame.font.Font(font_path, text_size)
 FONT_STYLE = 'freesansbold.ttf'
 
 TITLE_1 = pygame.image.load(os.path.join(IMG_DIR, "Menus/menu_title_1.png"))
