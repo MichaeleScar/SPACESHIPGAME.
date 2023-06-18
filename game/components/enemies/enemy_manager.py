@@ -10,6 +10,7 @@ class EnemyManager:
         self.enemies: list[Enemy] = []
         self.enemies_2: list[Enemy_2] = []
         self.meteors: list[Meteor] = []
+        self.dead_player_sound = pygame.mixer.Sound("game/assets/Sounds/dead_players_sound.ogg")
         
         self.enemy_timer = 0  # Contador de tiempo para el enemigo
         self.enemy_2_timer = 0 
@@ -41,6 +42,7 @@ class EnemyManager:
                 game.playing = False
                 game.death_count += 1
                 pygame.time.delay(1000)
+
                 break
 
         for enemy_2 in self.enemies_2:
@@ -50,6 +52,7 @@ class EnemyManager:
                 game.playing = False
                 game.death_count += 1
                 pygame.time.delay(1000)
+                self.dead_player_sound.play()
                 break
 
         for meteor in self.meteors:
@@ -59,6 +62,7 @@ class EnemyManager:
                 game.playing = False
                 game.death_count += 1
                 pygame.time.delay(1000)
+                self.dead_player_sound.play()
                 break
 
     def draw(self, screen):

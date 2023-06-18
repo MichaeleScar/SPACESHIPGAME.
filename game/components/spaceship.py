@@ -18,6 +18,7 @@ class Spaceship(Sprite):
         self.power_up_time = 0
         self.change_image_timer = 0
         self.sound = pygame.mixer.Sound("game/assets/Sounds/player_bullet.ogg")
+        
 
 
     def update(self, user_input, bullet_manager):
@@ -32,6 +33,7 @@ class Spaceship(Sprite):
         elif user_input[pygame.K_SPACE]:
             self.shoot(bullet_manager)
             self.sound.play()
+            
 
     
     

@@ -8,6 +8,9 @@ class BulletManager:
     def __init__(self):
         self.player_bullets: list[Bullet] = []
         self.enemy_bullets: list[Bullet] =[]
+        self.dead_player_sound = pygame.mixer.Sound("game/assets/Sounds/dead_players_sound.ogg")
+        self.enemy_dead = pygame.mixer.Sound("game/assets/Sounds/enemy_dead.ogg")
+        
 
 
     def update(self, game):
@@ -19,8 +22,8 @@ class BulletManager:
                    #game.player.set_image(size=(80,120),image=SPACESHIP_DESTROY)
                    game.death_count += 1
                    game.playing = False
-                   pygame.time.delay(2000)
-
+                   pygame.time.delay(1000)
+                   self.dead_player_sound.play()
                 break
 
         for bullet in self.player_bullets:
@@ -33,6 +36,7 @@ class BulletManager:
                     if enemy in game.enemy_manager.enemies:
                         game.enemy_manager.enemies.remove(enemy)
                         game.score += 1
+                        self.enemy_dead.play()
                     break
 
             for enemy_2 in game.enemy_manager.enemies_2:
@@ -42,6 +46,7 @@ class BulletManager:
                     if enemy_2 in game.enemy_manager.enemies_2:
                         game.enemy_manager.enemies_2.remove(enemy_2)
                         game.score += 1
+                        self.enemy_dead.play()
                     break
                 
             for meteor in game.enemy_manager.meteors:
@@ -49,10 +54,9 @@ class BulletManager:
                     if bullet in self.player_bullets:
                         self.player_bullets.remove(bullet)
                     if meteor in game.enemy_manager.meteors:
-                        
                         game.enemy_manager.meteors.remove(meteor)
                         game.score += 1
-
+                        self.enemy_dead.play()
                     break
             
         

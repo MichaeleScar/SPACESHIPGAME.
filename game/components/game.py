@@ -33,6 +33,14 @@ class Game:
         self.menu = Menu(ICON, TITLE_1, TITLE_2, "", text_size=40)
         self.death_menu = DeathMenu(SPACESHIP_DESTROY,GAMEOVER, FINAL_TITLE_1, "message 3")
         self.power_up_manager = PowerupsManager()
+        
+        
+        self.lets_play = pygame.mixer.Sound("game/assets/Sounds/lets_play.ogg")
+        
+        self.menu_final = pygame.mixer.Sound("game/assets/Sounds/menu_final.ogg")
+
+        self.intro_menu = pygame.mixer.Sound("game/assets/Sounds/intro_menu.ogg")
+        self.sound_played = False
 
 
 
@@ -47,6 +55,8 @@ class Game:
 
     def play(self):
         self.reset_all()
+        self.lets_play.play()
+
         while self.playing:
             self.events()
             self.update()
@@ -98,21 +108,21 @@ class Game:
 
     def show_menu(self):
         if self.death_count > 0:
+            self.menu_final.play() 
             self.death_menu.update_highest_score(self.score)
             self.highest_score = self.death_menu.highest_score
-        
             self.death_menu.update_message(
                 pygame.transform.scale(SPACESHIP_DESTROY, (50, 50)), 
                 pygame.transform.scale(GAMEOVER, (300,100)),
                 pygame.transform.scale(FINAL_TITLE_1, (500, 150)),
                 f"HIGHEST SCORE: {self.highest_score}\nSCORE: {self.score}\nDEATHS: {self.death_count}"
             )
-            
             self.death_menu.draw(self.screen)
             self.menu.events(self.on_close, self.play)
         else:
             self.menu.draw(self.screen)
             self.menu.events(self.on_close, self.play)
+            self.intro_menu.play()
 
     def on_close(self):
         self.playing = False
@@ -124,6 +134,8 @@ class Game:
         self.playing = True
         self.score = 0
         self.power_up_manager.reset()
+        self.menu_final.stop()
+        self.intro_menu.stop()
         
 
     
