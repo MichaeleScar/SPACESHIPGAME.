@@ -59,17 +59,6 @@ class PowerupsManager:
         if current_time > self.when_appears:
             self.generated_this_cycle = False
 
-    def reset(self, game):
-        # Reinicia el administrador de power-ups
-        self.power_ups = []
-        self.current_power_up = None
-        self.when_appears = random.randint(15000, 20000)
-        self.generated_this_cycle = False
-
-        # Restablecer el estado del jugador
-        game.player.has_power_up = False
-        game.player.set_image((70, 70), SPACESHIP)
-
     def draw(self, screen):
         # Dibuja todos los power-ups en la pantalla
         for power_up in self.power_ups:
@@ -83,3 +72,13 @@ class PowerupsManager:
         font = pygame.font.Font(FONT_S, 24)
         text = font.render(f"Next PowerUp: {time_left_seconds}s", True, (255, 255, 255))
         screen.blit(text, (10, 35))
+
+    def reset(self, game):
+        # Reinicia el administrador de power-ups
+        self.power_ups = []
+        self.current_power_up = None
+        self.when_appears = random.randint(15000, 20000)
+        self.generated_this_cycle = False
+        # Restablecer el estado del jugador
+        game.player.has_power_up = False
+        game.player.set_image((70, 70), SPACESHIP)
