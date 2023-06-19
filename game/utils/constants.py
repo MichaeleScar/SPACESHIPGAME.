@@ -16,7 +16,15 @@ SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
 
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
-HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
+# Define the desired new size
+new_width = 50  # Insert the desired width in pixels
+new_height = 50  # Insert the desired height in pixels
+
+# Resize the image
+HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/heart_armor.png'))
+HEART = pygame.transform.scale(HEART, (new_width, new_height))
+
+
 
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = 'shield'
@@ -26,6 +34,7 @@ PLAYER_TYPE = 'player_1'
 
 SPACESHIP = pygame.image.load(os.path.join(IMG_DIR, "Spaceship/spaceship.png"))
 SPACESHIP_SHIELD = pygame.image.load(os.path.join(IMG_DIR, "Spaceship/spaceship_shield.png"))
+SPACESHIP_HEART_ARMOR = pygame.image.load(os.path.join(IMG_DIR, "Spaceship/spaceship_heart_armor.png"))
 BULLET = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_1.png"))
 SPACESHIP_DESTROY = pygame.image.load(os.path.join(IMG_DIR, "Destroy/spaceship_destroy.png"))
 
@@ -36,9 +45,7 @@ METEOR_1 = pygame.image.load(os.path.join(IMG_DIR, "Environment/meteor.png"))
 METEOR_DESTROY = pygame.image.load(os.path.join(IMG_DIR, "Destroy/meteor_destroy.png"))
 ENEMY_DESTROY = pygame.image.load(os.path.join(IMG_DIR, "Destroy/enemy_destroy.png"))
 
-#text_size = 40
-#font_path = "game/assets/Fonts/ka1.otf"
-#FONT_STYLE = pygame.font.Font(font_path, text_size)
+FONT_S = "game/assets/Fonts/ka1.ttf"
 FONT_STYLE = 'freesansbold.ttf'
 
 TITLE_1 = pygame.image.load(os.path.join(IMG_DIR, "Menus/menu_title_1.png"))

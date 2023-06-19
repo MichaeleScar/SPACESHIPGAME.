@@ -33,6 +33,7 @@ class Enemy(Sprite):
         self.moving_index = 0
 
         self.shooting_time = random.randint(100, 150)
+         
 
 
     def update(self, ships, game):
@@ -68,6 +69,8 @@ class Enemy(Sprite):
             bullet = Bullet(self)
             bullet_manager.add_bullet(bullet)
             self.shooting_time += random.randint(100, 150)
+            
+            
 
     def set_image(self, size, image):
         self.image = image

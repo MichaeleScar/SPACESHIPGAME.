@@ -7,6 +7,7 @@ from game.components.enemies.enemy import Enemy
 class Meteor(Enemy):
     SPEED_Y = 7
     
+    
 
     def __init__(self):
         self.image = pygame.transform.scale(METEOR_1,(30, 50))

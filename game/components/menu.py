@@ -1,7 +1,7 @@
 
 
 import pygame
-from game.utils.constants import BG, FONT_STYLE, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, TITLE_1, TITLE_2
+from game.utils.constants import BG, FONT_S, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, TITLE_1, TITLE_2
 
 
 
@@ -10,7 +10,7 @@ class Menu:
     HALF_SCREEN_WIDTH = SCREEN_WIDTH // 2
 
     def __init__(self, icon, message, message_2, message_3, text_size=30):
-        self.font = pygame.font.Font(FONT_STYLE, text_size)
+        self.font = pygame.font.Font(FONT_S, text_size)
         self.update_message(icon, message, message_2, message_3="")
         pygame.init()
         pygame.display.set_caption(TITLE)
@@ -52,7 +52,7 @@ class Menu:
     
     #icon 
         self.icon_rect = self.icon.get_rect()
-        self.icon_rect.center = (self.HALF_SCREEN_WIDTH, self.HALF_SCREEN_HEIGHT )
+        self.icon_rect.center = (self.HALF_SCREEN_WIDTH - 5, self.HALF_SCREEN_HEIGHT )
 
     # Renderizar y posicionar el primer mensaje
         self.image_rect = self.image.get_rect()
@@ -68,7 +68,7 @@ class Menu:
     # Renderizar y posicionar el tercer mensaje
         self.text_3 = self.font.render(self.message_3, True, (255, 255, 250))
         self.text_3_rect = self.text_3.get_rect()
-        self.text_3_rect.centerx = self.HALF_SCREEN_WIDTH
+        self.text_3_rect.centerx = self.HALF_SCREEN_WIDTH + 10
         self.text_3_rect.y = self.HALF_SCREEN_HEIGHT 
 
     def draw_background(self):

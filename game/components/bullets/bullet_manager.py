@@ -10,6 +10,7 @@ class BulletManager:
         self.enemy_bullets: list[Bullet] =[]
         self.dead_player_sound = pygame.mixer.Sound("game/assets/Sounds/dead_players_sound.ogg")
         self.enemy_dead = pygame.mixer.Sound("game/assets/Sounds/enemy_dead.ogg")
+        self.enemy_bullet = pygame.mixer.Sound("game/assets/Sounds/enemy_bullet.ogg") 
         
 
 
@@ -19,7 +20,6 @@ class BulletManager:
             if bullet.rect.colliderect(game.player.rect):
                 self.enemy_bullets.remove(bullet)
                 if not game.player.has_power_up or game.player.power_up_type != SHIELD_TYPE:
-                   #game.player.set_image(size=(80,120),image=SPACESHIP_DESTROY)
                    game.death_count += 1
                    game.playing = False
                    pygame.time.delay(1000)
@@ -68,8 +68,12 @@ class BulletManager:
             bullet.draw(screen)
 
     def add_bullet(self, bullet):
+        self.enemy_bullet_sound_played = False
         if bullet.owner == ENEMY_TYPE and not self.enemy_bullets:
             self.enemy_bullets.append(bullet)
+            if not self.enemy_bullet_sound_played:
+                self.enemy_bullet.play()
+                self.enemy_bullet_sound_played = True
         if bullet.owner == PLAYER_TYPE:
             self.player_bullets.append(bullet)
 

@@ -7,7 +7,7 @@ from game.utils.constants import SCREEN_WIDTH
 
 class Spaceship(Sprite):
     def __init__(self):
-        self.image = pygame.transform.scale(SPACESHIP, (60, 40))
+        self.image = pygame.transform.scale(SPACESHIP, (70, 70))
         self.destroyed_image = pygame.transform.scale(SPACESHIP_DESTROY, (60, 40))
         self.rect = self.image.get_rect()
         self.rect.x = 520
@@ -33,6 +33,7 @@ class Spaceship(Sprite):
         elif user_input[pygame.K_SPACE]:
             self.shoot(bullet_manager)
             self.sound.play()
+            
             
 
     

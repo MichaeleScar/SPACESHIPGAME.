@@ -9,7 +9,7 @@ from game.components.power_ups.powerups_manager import PowerupsManager
 
 from game.components.spaceship import Spaceship
 
-from game.utils.constants import BG, FINAL_TITLE_1, FONT_STYLE, GAMEOVER, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, SPACESHIP_DESTROY, TITLE, FPS, DEFAULT_TYPE, TITLE_1, TITLE_2
+from game.utils.constants import BG, FINAL_TITLE_1, FONT_S, FONT_STYLE, GAMEOVER, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, SPACESHIP_DESTROY, TITLE, FPS, DEFAULT_TYPE, TITLE_1, TITLE_2
 
 
 class Game:
@@ -35,12 +35,14 @@ class Game:
         self.power_up_manager = PowerupsManager()
         
         
+        
         self.lets_play = pygame.mixer.Sound("game/assets/Sounds/lets_play.ogg")
         
         self.menu_final = pygame.mixer.Sound("game/assets/Sounds/menu_final.ogg")
 
         self.intro_menu = pygame.mixer.Sound("game/assets/Sounds/intro_menu.ogg")
-        self.sound_played = False
+        
+        self.intro_menu_played = False
 
 
 
@@ -100,13 +102,14 @@ class Game:
         self.y_pos_bg += self.game_speed
 
     def draw_score(self):
-        font = pygame.font.Font(FONT_STYLE, 22)
+        font = pygame.font.Font(FONT_S, 22)
         text = font.render(f"Score: {self.score}", True, (255, 255, 255))
         text_rect = text.get_rect()
         text_rect.center = (1000, 50)
         self.screen.blit(text, text_rect)
 
     def show_menu(self):
+        
         if self.death_count > 0:
             self.menu_final.play() 
             self.death_menu.update_highest_score(self.score)
@@ -115,14 +118,18 @@ class Game:
                 pygame.transform.scale(SPACESHIP_DESTROY, (50, 50)), 
                 pygame.transform.scale(GAMEOVER, (300,100)),
                 pygame.transform.scale(FINAL_TITLE_1, (500, 150)),
-                f"HIGHEST SCORE: {self.highest_score}\nSCORE: {self.score}\nDEATHS: {self.death_count}"
+                f"HIGHEST SCORE: {self.highest_score}                SCORE: {self.score} DEATHS: {self.death_count}"
             )
             self.death_menu.draw(self.screen)
             self.menu.events(self.on_close, self.play)
         else:
+            if not self.intro_menu_played:
+                self.intro_menu.play()
+                self.intro_menu_played = True
             self.menu.draw(self.screen)
             self.menu.events(self.on_close, self.play)
-            self.intro_menu.play()
+            
+        
 
     def on_close(self):
         self.playing = False
