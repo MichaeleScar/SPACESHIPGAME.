@@ -56,12 +56,7 @@ class Game:
         pygame.quit()
 
     def play(self):
-        """
-        Inicia el juego principal.
-
-        Reinicia los atributos del juego y ejecuta el bucle principal del juego
-        mientras el jugador esté jugando.
-        """
+        #Reinicia los atributos del juego y ejecuta el bucle principal del juego
         self.reset_all()
         self.lets_play.play()
         while self.playing:
@@ -70,23 +65,13 @@ class Game:
             self.draw()
 
     def events(self):
-        """
-        Maneja los eventos del juego.
-
-        Se encarga de manejar los eventos de salida del juego, como el cierre de
-        la ventana.
-        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.playing = False
 
     def update(self):
-        """
-        Actualiza el estado del juego.
-
-        Actualiza el estado de los componentes del juego, como la nave espacial,
-        los enemigos, las balas y los power-ups.
-        """
+    
+        #Actualiza el estado del juego.
         user_input = pygame.key.get_pressed()
         self.player.update(user_input, self.bullet_manager) 
         self.enemy_manager.update(self)
@@ -94,13 +79,7 @@ class Game:
         self.power_up_manager.update(self)
 
     def draw(self):
-        """
-        Dibuja los elementos en la pantalla.
-
-        Se encarga de dibujar los elementos del juego en la pantalla, como el
-        fondo, la nave espacial, los enemigos, las balas, los power-ups y la
-        puntuación.
-        """
+        #Dibuja los elementos en la pantalla.
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
         self.draw_background()
@@ -114,12 +93,7 @@ class Game:
         pygame.display.flip()
 
     def draw_background(self):
-        """
-        Dibuja el fondo en movimiento.
-
-        Se encarga de dibujar el fondo en movimiento en la pantalla, creando un
-        efecto de desplazamiento vertical.
-        """
+        #Dibuja el fondo en movimiento.
         image = pygame.transform.scale(BG, (SCREEN_WIDTH, SCREEN_HEIGHT))
         image_height = image.get_height()
         self.screen.blit(image, (self.x_pos_bg, self.y_pos_bg))
@@ -130,11 +104,7 @@ class Game:
         self.y_pos_bg += self.game_speed
 
     def draw_score(self):
-        """
-        Dibuja la puntuación en la pantalla.
-
-        Se encarga de dibujar la puntuación actual del jugador en la pantalla.
-        """
+        #Dibuja la puntuación en la pantalla.
         font = pygame.font.Font(FONT_S, 22)
         text = font.render(f"Score: {self.score}", True, (255, 255, 255))
         text_rect = text.get_rect()
@@ -142,12 +112,7 @@ class Game:
         self.screen.blit(text, text_rect)
 
     def show_menu(self):
-        """
-        Muestra el menú del juego.
-
-        Se encarga de mostrar el menú del juego y gestionar los eventos del
-        menú.
-        """
+        #Se encarga de mostrar el menú del juego y gestionar los eventos del menú.
         if self.death_count > 0:
             self.menu_final.play() 
             self.highest_score = self.death_menu.highest_score
@@ -167,22 +132,12 @@ class Game:
             self.menu.events(self.on_close, self.play)
 
     def on_close(self):
-        """
-        Maneja el evento de cierre de la ventana.
-
-        Se encarga de cerrar el juego cuando se detecta el evento de cierre de
-        la ventana.
-        """
+        #Se encarga de cerrar el juego cuando se detecta el evento de cierre de la ventana.
         self.playing = False
         self.running = False
 
     def reset_all(self):
-        """
-        Reinicia todos los atributos del juego.
-
-        Reinicia los atributos del juego a sus valores iniciales para iniciar
-        un nuevo juego.
-        """
+        #Reinicia los atributos del juego a sus valores iniciales para iniciar un nuevo juego.
         self.bullet_manager.reset()
         self.enemy_manager.reset()
         self.playing = True

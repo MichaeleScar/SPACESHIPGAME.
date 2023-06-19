@@ -12,7 +12,7 @@ class BulletManager:
         self.enemy_bullet = pygame.mixer.Sound("game/assets/Sounds/enemy_bullet.ogg")  # Sonido de bala enemiga
 
     def update(self, game):
-        """Actualiza las balas y verifica las colisiones con los jugadores y enemigos."""
+        #Actualiza las balas y verifica las colisiones con los jugadores y enemigos.
         for bullet in self.enemy_bullets:
             bullet.update(self.enemy_bullets, game.player)
             if bullet.rect.colliderect(game.player.rect):
@@ -58,14 +58,13 @@ class BulletManager:
                     break
 
     def draw(self, screen):
-        """Dibuja las balas en la pantalla."""
+        #Dibuja las balas en la pantalla.
         for bullet in self.enemy_bullets:
             bullet.draw(screen)
         for bullet in self.player_bullets:
             bullet.draw(screen)
-
     def add_bullet(self, bullet):
-        """Agrega una bala a la lista correspondiente."""
+        #Agrega una bala a la lista correspondiente.
         self.enemy_bullet_sound_played = False
         if bullet.owner == ENEMY_TYPE and not self.enemy_bullets:
             self.enemy_bullets.append(bullet)
@@ -73,9 +72,12 @@ class BulletManager:
                 self.enemy_bullet.play()
                 self.enemy_bullet_sound_played = True
         if bullet.owner == PLAYER_TYPE:
-            self.player_bullets.append(bullet)
+            # Limitar a cuatro balas del jugador en pantalla
+            if len(self.player_bullets) < 4:
+                self.player_bullets.append(bullet)
+
 
     def reset(self):
-        """Restablece las listas de balas."""
+        #Restablece las listas de balas.
         self.player_bullets = []
         self.enemy_bullets = []

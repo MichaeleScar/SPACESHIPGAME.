@@ -16,14 +16,9 @@ class Bullet(Sprite):
         self.rect.center = spaceship.rect.center
         self.owner = spaceship.type  # Tipo de dueño de la bala (jugador o enemigo)
 
-    def update(self, bullets, enemies):
-        """
-        Actualiza la posición de la bala y verifica colisiones con enemigos.
-
-        Args:
-            bullets: Lista de balas a la que pertenece la bala actual.
-            enemies: Lista de enemigos para verificar colisiones.
-        """
+    def update(self, bullets, enemies): 
+        # Actualiza la posición de la bala y verifica colisiones con enemigos.
+        
         if self.owner == ENEMY_TYPE:
             self.rect.y += self.SPEED
             if self.rect.y >= SCREEN_HEIGHT:
@@ -40,10 +35,5 @@ class Bullet(Sprite):
                         break
 
     def draw(self, screen):
-        """
-        Dibuja la bala en la pantalla.
-
-        Args:
-            screen: Superficie de la pantalla donde se dibujará la bala.
-        """
+        #Dibuja la bala en la pantalla.
         screen.blit(self.image, (self.rect.x, self.rect.y))

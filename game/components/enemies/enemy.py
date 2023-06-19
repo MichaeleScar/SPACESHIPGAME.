@@ -35,9 +35,6 @@ class Enemy(Sprite):
         """
         Actualiza la posición del enemigo y realiza acciones como disparar.
 
-        Args:
-            ships: Lista de naves enemigas.
-            game: Instancia del juego.
         """
         self.rect.y += self.speed_y
         self.shoot(game.bullet_manager)
@@ -66,9 +63,6 @@ class Enemy(Sprite):
     def draw(self, screen):
         """
         Dibuja el enemigo en la pantalla.
-
-        Args:
-            screen: Superficie de la pantalla donde se dibujará el enemigo.
         """
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
@@ -84,9 +78,6 @@ class Enemy(Sprite):
         """
         Establece la imagen del enemigo con un tamaño específico.
 
-        Args:
-            size: Tamaño deseado de la imagen.
-            image: Imagen a establecer.
         """
         self.image = image
         self.image = pygame.transform.scale(self.image, size)
