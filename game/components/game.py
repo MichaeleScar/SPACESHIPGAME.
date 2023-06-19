@@ -9,7 +9,7 @@ from game.components.power_ups.powerups_manager import PowerupsManager
 
 from game.components.spaceship import Spaceship
 
-from game.utils.constants import BG, FINAL_TITLE_1, FONT_S, FONT_STYLE, GAMEOVER, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, SPACESHIP_DESTROY, TITLE, FPS, DEFAULT_TYPE, TITLE_1, TITLE_2
+from game.utils.constants import BG, FINAL_TITLE_1, FONT_S, GAMEOVER, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, SPACESHIP_DESTROY, TITLE, FPS, DEFAULT_TYPE, TITLE_1, TITLE_2
 
 
 class Game:
@@ -33,6 +33,7 @@ class Game:
         self.menu = Menu(ICON, TITLE_1, TITLE_2, "", text_size=40)
         self.death_menu = DeathMenu(SPACESHIP_DESTROY,GAMEOVER, FINAL_TITLE_1, "message 3")
         self.power_up_manager = PowerupsManager()
+    
         
         
         
@@ -58,7 +59,6 @@ class Game:
     def play(self):
         self.reset_all()
         self.lets_play.play()
-
         while self.playing:
             self.events()
             self.update()
@@ -88,6 +88,7 @@ class Game:
         self.enemy_manager.draw(self.screen)
         self.bullet_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
+        self.power_up_manager.display_time_left(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
@@ -140,7 +141,7 @@ class Game:
         self.enemy_manager.reset()
         self.playing = True
         self.score = 0
-        self.power_up_manager.reset()
+        self.power_up_manager.reset(self)
         self.menu_final.stop()
         self.intro_menu.stop()
         

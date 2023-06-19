@@ -19,7 +19,6 @@ class Enemy(Sprite):
 
     def __init__(self):
         self.image = pygame.transform.scale(ENEMY_1,(50, 50))
-        self.destroyed_image = pygame.transform.scale(ENEMY_DESTROY, (50, 50))
         self.rect = self.image.get_rect()
         self.rect.x = random.choice(self.X_POS_LIST)
         self.rect.y = self.Y_POS

@@ -21,9 +21,9 @@ class BulletManager:
                 self.enemy_bullets.remove(bullet)
                 if not game.player.has_power_up or game.player.power_up_type != SHIELD_TYPE:
                    game.death_count += 1
-                   game.playing = False
-                   pygame.time.delay(1000)
                    self.dead_player_sound.play()
+                   game.playing = False
+                   
                 break
 
         for bullet in self.player_bullets:

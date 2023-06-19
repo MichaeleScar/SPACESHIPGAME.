@@ -18,6 +18,8 @@ class Spaceship(Sprite):
         self.power_up_time = 0
         self.change_image_timer = 0
         self.sound = pygame.mixer.Sound("game/assets/Sounds/player_bullet.ogg")
+        self.start_time = 0
+        
         
 
 
