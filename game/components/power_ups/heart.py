@@ -7,6 +7,3 @@ class Heart(PowerUp):
         super().__init__(HEART, HEART_TYPE)
         self.type = HEART_TYPE
         self.start_time = 0
-    def set_position(self, x, y):
-        self.rect.x = x
-        self.rect.y = y

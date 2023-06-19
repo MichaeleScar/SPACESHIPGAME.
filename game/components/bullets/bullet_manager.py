@@ -4,31 +4,29 @@ from game.utils.constants import ENEMY_DESTROY, ENEMY_TYPE, METEOR_DESTROY, PLAY
 
 
 class BulletManager:
-
     def __init__(self):
-        self.player_bullets: list[Bullet] = []
-        self.enemy_bullets: list[Bullet] =[]
-        self.dead_player_sound = pygame.mixer.Sound("game/assets/Sounds/dead_players_sound.ogg")
-        self.enemy_dead = pygame.mixer.Sound("game/assets/Sounds/enemy_dead.ogg")
-        self.enemy_bullet = pygame.mixer.Sound("game/assets/Sounds/enemy_bullet.ogg") 
-        
-
+        self.player_bullets: list[Bullet] = []  # Lista de balas disparadas por el jugador
+        self.enemy_bullets: list[Bullet] = []  # Lista de balas disparadas por los enemigos
+        self.dead_player_sound = pygame.mixer.Sound("game/assets/Sounds/dead_players_sound.ogg")  # Sonido de jugador muerto
+        self.enemy_dead = pygame.mixer.Sound("game/assets/Sounds/enemy_dead.ogg")  # Sonido de enemigo muerto
+        self.enemy_bullet = pygame.mixer.Sound("game/assets/Sounds/enemy_bullet.ogg")  # Sonido de bala enemiga
 
     def update(self, game):
+        """Actualiza las balas y verifica las colisiones con los jugadores y enemigos."""
         for bullet in self.enemy_bullets:
             bullet.update(self.enemy_bullets, game.player)
             if bullet.rect.colliderect(game.player.rect):
                 self.enemy_bullets.remove(bullet)
                 if not game.player.has_power_up or game.player.power_up_type != SHIELD_TYPE:
-                   game.death_count += 1
-                   self.dead_player_sound.play()
-                   game.playing = False
-                   
+                    game.death_count += 1
+                    self.dead_player_sound.play()
+                    game.playing = False
                 break
 
         for bullet in self.player_bullets:
             bullet.update(self.player_bullets, game.enemy_manager.enemies + game.enemy_manager.enemies_2 + game.enemy_manager.meteors)
-            #verificar si hemos chocado al jugador
+
+            # Verificar colisiones con enemigos
             for enemy in game.enemy_manager.enemies:
                 if bullet.rect.colliderect(enemy.rect):
                     if bullet in self.player_bullets:
@@ -58,16 +56,16 @@ class BulletManager:
                         game.score += 1
                         self.enemy_dead.play()
                     break
-            
-        
 
     def draw(self, screen):
+        """Dibuja las balas en la pantalla."""
         for bullet in self.enemy_bullets:
             bullet.draw(screen)
         for bullet in self.player_bullets:
             bullet.draw(screen)
 
     def add_bullet(self, bullet):
+        """Agrega una bala a la lista correspondiente."""
         self.enemy_bullet_sound_played = False
         if bullet.owner == ENEMY_TYPE and not self.enemy_bullets:
             self.enemy_bullets.append(bullet)
@@ -78,9 +76,6 @@ class BulletManager:
             self.player_bullets.append(bullet)
 
     def reset(self):
+        """Restablece las listas de balas."""
         self.player_bullets = []
-        self.enemy_bullets  = []
-        
-
-
-    
+        self.enemy_bullets = []

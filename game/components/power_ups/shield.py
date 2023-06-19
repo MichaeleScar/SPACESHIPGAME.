@@ -7,10 +7,6 @@ class Shield(PowerUp):
         super().__init__(SHIELD, SHIELD_TYPE)
         self.type = SHIELD_TYPE
         self.start_time = 0
-        
-
-    def set_position(self, x, y):
-        self.rect.x = x
-        self.rect.y = y
+    
 
     
